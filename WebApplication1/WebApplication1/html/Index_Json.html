@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Example: Send Json</title>
+</head>
+<body>
+    <h1>Example of sending JSON!</h1>
+
+    <div>
+        <p>
+            Name: <br />
+            <input name="UserName id="UserName" />
+        </p>
+        <p>
+            Age: <br />
+            <input name="UserAge id="UserAge" />
+        </p>
+        <button id="SendBth">Send</button>
+    </div>
+
+    <div id="Massage"></div>
+
+    <script>
+        document.getElementById("sendBth").addEventListener("click", click_send);
+
+        async function click_send() {
+            const response = await fetch("Api/User",
+                {
+                    method = "Post",
+                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: window.UserName.value,
+                        age: document.getElementById("UserAge").value,
+                    })
+                }
+            );
+            const Massage = await response.json();
+            document.getElementById("Massage").innerText ="Log:" + Massage.text;
+        }
+    </script>
+
+</body>
+</html>
